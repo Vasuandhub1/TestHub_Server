@@ -14,7 +14,7 @@ const cookieParser = require("cookie-parser")
 connectDB()
 
 // allowing all the origins
-const allowedOrigins = ['http://localhost:5173', 'https://your-production-frontend.com'];
+const allowedOrigins = ['http://localhost:5173', 'https://test-hub-client.vercel.app'];
 
 app.use(cors({
   origin: function (origin, callback) {
