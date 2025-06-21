@@ -209,7 +209,7 @@ const loginUser= async(req,res,next)=>{
                                  const token = await createToken(payload,"2h")
                                  
                                  // now send the cookie and res
-                                 res.cookie("CreateStudent",token,{expiresIn:"2h"})
+                                 res.cookie("CreateStudent",token,{expiresIn:"2h" httpOnly: true, secure: true, sameSite: 'None' })
  
                                  // now sedn the data
                                  return next(handelSucess(res,"Create Student","StudentCreate"))
