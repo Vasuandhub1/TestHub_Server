@@ -28,7 +28,7 @@ const FacultyRegister = async (req,res,next)=>{
                  const isFacultypresent = await Faculty.findOne({UserId:TokenData._id})
                 
                  if(isFacultypresent){
-                    res.cookie("CreateFaculty", "", { maxAge: 0, httpOnly: true });
+                    res.cookie("CreateFaculty", "", { maxAge: 0,httpOnly: true,secure: true, sameSite: 'None'});
                     return next(handelErr(res,"Faculty is Already present",isFacultypresent,401))
                 }
                 else{
@@ -59,7 +59,7 @@ const FacultyRegister = async (req,res,next)=>{
                     }
                     const token = await createToken(payload,"2h")
                     // now send the res
-                    res.cookie("Faculty",token,{expiresIn:"24h"})
+                    res.cookie("Faculty",token,{expiresIn:"24h",httpOnly: true,secure: true, sameSite: 'None'})
                     return next(handelSucess(res,"Student created Sucessfully",data))
 
                 }else{

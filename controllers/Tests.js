@@ -139,7 +139,7 @@ const StartCodingTest  = async (req,res,next)=>{
                     await Students.findByIdAndUpdate(token.student_id,{$push:{CodingTest:test._id}})
 
                     // now send the test Start cookie 
-                    res.cookie("CodingTest",TestToken,{expiresIn:new Date( Date().now + 1000*60*60*test.AttemptTime)})
+                    res.cookie("CodingTest",TestToken,{expiresIn:new Date( Date().now + 1000*60*60*test.AttemptTime),httpOnly: true,secure: true, sameSite: 'None'})
                     return next(handelSucess(res,"Start test All the best",test))
                 }
             }else{
@@ -190,7 +190,7 @@ const EndTest = async(req,res,next)=>{
         const {CodingTest} = req.cookies
 
         // now expire the cookie 
-        return res.cookie("CodingTest","",{})
+        return res.cookie("CodingTest","",{httpOnly: true,secure: true, sameSite: 'None'})
     }catch(err){
         return next(handelErr(res,err.message,err,404))
     }
@@ -430,7 +430,7 @@ const StartMCQTest = async(req,res,next)=>{
                     await Students.findByIdAndUpdate(token.student_id,{$push:{MCQtest:test._id}})
 
                     // now send the test Start cookie 
-                    res.cookie("MCQTest",TestToken,{expiresIn:new Date( Date().now + 1000*60*60*test.AttemptTime)})
+                    res.cookie("MCQTest",TestToken,{expiresIn:new Date( Date().now + 1000*60*60*test.AttemptTime),httpOnly: true,secure: true, sameSite: 'None'})
                     return next(handelSucess(res,"Start test All the best",test))
                 }
             }else{

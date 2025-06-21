@@ -140,7 +140,7 @@ const loginUser= async(req,res,next)=>{
                                  }
                                  const token = await createToken(payload,"2h")
                                  // now send the res
-                                 res.cookie("Student",token,{expiresIn:"2h"})
+                                 res.cookie("Student",token,{expiresIn:"2h", httpOnly: true,secure: true, sameSite: 'None'})
                                  return next(handelSucess(res,"logined sucessful",data))
                              }else if(isFaculty){
                                  // if faculty login as faculty
@@ -160,7 +160,7 @@ const loginUser= async(req,res,next)=>{
                                  }
                                  const token = await createToken(payload,"2h")
                                  // now send the res
-                                 res.cookie("Faculty",token,{expiresIn:"24h"})
+                                 res.cookie("Faculty",token,{expiresIn:"24h",httpOnly: true,secure: true, sameSite: 'None'})
                                  return next(handelSucess(res,"logined sucessful",data))
                              }else{
                                  // if admin login as admin 
@@ -175,7 +175,7 @@ const loginUser= async(req,res,next)=>{
                                  }
                                  const token = await createToken(payload,"2h")
                                  // now send the res
-                                 res.cookie("Admin",token,{expiresIn:"24h"})
+                                 res.cookie("Admin",token,{expiresIn:"24h",httpOnly: true,secure: true, sameSite: 'None'})
                                  return next(handelSucess(res,"logined sucessful",data))
                              }
                          }else{
@@ -186,7 +186,7 @@ const loginUser= async(req,res,next)=>{
                                  const payload={ email:isPresent.userEmail , _id:isPresent._id,role:isPresent.role}
                                  const token = await createToken(payload,"2h")
                                  // now send the cookie and res
-                                 res.cookie("createAdmin",token,{expiresIn:"2h"})
+                                 res.cookie("createAdmin",token,{expiresIn:"2h",httpOnly: true,secure: true, sameSite: 'None'})
  
                                  // now sedn the data
                                  return next(handelSucess(res,"Create Admin","AdminCreate"))
@@ -197,7 +197,7 @@ const loginUser= async(req,res,next)=>{
                                  const payload={ email:isPresent.userEmail , _id:isPresent._id, role:isPresent.role}
                                  const token = await createToken(payload,"2h")
                                  // now send the cookie and res
-                                 res.cookie("CreateFaculty",token,{expiresIn:"2h"})
+                                 res.cookie("CreateFaculty",token,{expiresIn:"2h",httpOnly: true,secure: true, sameSite: 'None'})
  
                                  // now sedn the data
                                  return next(handelSucess(res,"Create Faculty","FacultyCreate"))
