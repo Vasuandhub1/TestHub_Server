@@ -14,7 +14,18 @@ const cookieParser = require("cookie-parser")
 connectDB()
 
 // allowing all the origins
-app.use(cors({credentials:true,origin:true}))
+const allowedOrigins = ['http://localhost:5173', 'https://your-production-frontend.com'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 // prasing the json 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
